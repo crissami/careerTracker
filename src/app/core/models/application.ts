@@ -17,11 +17,11 @@ export const TECH_STACKS = ['angular', 'react', 'vue', 'node', 'python', 'typesc
 export type TechStack = (typeof TECH_STACKS)[number];
 
 
-export interface Appication {
+export interface Application {
     id: string;
     company: string;
     role: string;
-    techStack: TechStack[] | [];
+    techStack: TechStack[];
     seniority: Seniority;
     workType: WorkType;
     location?: string;
@@ -29,7 +29,7 @@ export interface Appication {
     salaryMax?: number;
     jobUrl?: string;
     source: Source;
-    dataApplied?: string;
+    dateApplied?: string;
     status: Status;
     priority: Priority;
     notes?: string;
