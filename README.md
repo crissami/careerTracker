@@ -1,59 +1,76 @@
-# CareerTracker
+# careerTracker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
+A local-first job application tracker. Keep every application, interview and next
+step in one place, on your own machine. No account, no server, no data leaving the
+browser.
 
-## Development server
+## Why this exists
 
-To start a local development server, run:
+I am coming back to frontend development after two years away, relearning Angular
+from the ground up, and I wanted the practice project to be something I would
+actually use every day rather than another todo list. I am job hunting right now,
+so the tracker and the person using it are the same person.
 
-```bash
-ng serve
-```
+It is built in public, one small step at a time, and I write about the process as
+I go. https://theiterations.substack.com/
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Status
 
-## Code scaffolding
+Work in progress — week 1 of 6. Not usable yet.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Stack
 
-```bash
-ng generate component component-name
-```
+- **Angular 22** — standalone components, signals, zoneless, new control flow
+- **Tailwind CSS v4** — styling
+- **Angular CDK** — drag and drop for the kanban board
+- **IndexedDB** via [`idb`](https://github.com/jakearchibald/idb) — all data stays in the browser
+- **Vitest** — unit tests on the parts worth testing
+- No backend, no authentication, no AI
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Running locally
 
 ```bash
-ng test
+npm install
+npm start
 ```
 
-## Running end-to-end tests
+Then open `http://localhost:4200/`.
 
-For end-to-end (e2e) testing, run:
+Other commands:
 
 ```bash
-ng e2e
+npm run build    # production build into dist/
+npm test         # unit tests
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Roadmap
 
-## Additional Resources
+The scope below is locked for the first release. New ideas go to `IDEAS.md`.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [x] Project setup, Tailwind, data model
+- [x] IndexedDB storage service, first list
+- [ ] Create, edit and delete applications with Reactive Forms
+- [ ] Table view and kanban board with a toggle between them
+- [ ] Filtering by status, tech, seniority, work type and priority, plus sorting
+- [ ] Interviews attached to an application
+- [ ] Export and import the whole database as JSON
+- [ ] Responsive layout and dark mode
+- [ ] Deploy
+
+### What an application holds
+
+Company, role, tech stack, seniority, work type, location, salary range, job URL,
+source, date applied, status, priority, notes, and the next action with its date.
+
+Status pipeline: saved → applied → screening → interview → offer → rejected →
+archived.
+
+## Data and privacy
+
+Everything lives in your browser's IndexedDB. Nothing is uploaded anywhere. That
+also means clearing your browser data deletes your applications, so export to JSON
+if you care about them.
+
+## License
+
+MIT
