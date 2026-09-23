@@ -8,4 +8,9 @@ export class Applications {
     const db = await openDb();
     return db.getAll('applications');
   }
+
+  async add(application: Application): Promise<void> {
+    const db = await openDb();
+    await db.put('applications', application);
+  }
 }
