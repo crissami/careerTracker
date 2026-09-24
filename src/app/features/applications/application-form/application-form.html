@@ -1,9 +1,13 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
   <label>Company: </label>
   <input formControlName="company" />
+  @if (form.controls.company.touched && form.controls.company.invalid) {
+    <p>Company is required</p>
+  }
   <label>Role</label>
   <input formControlName="role" />
+  @if (form.controls.role.touched && form.controls.role.invalid) {
+    <p>Role is required</p>
+  }
   <button type="submit">Add</button>
 </form>
-
-{{ form.value | json }}
