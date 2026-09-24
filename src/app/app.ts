@@ -1,8 +1,10 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { Applications } from './core/storage/applications';
-import { Application, Status } from './core/models/application';
-import { ApplicationForm } from './features/applications/application-form/application-form';
+import { Application } from './core/models/application';
+import {
+  ApplicationForm,
+  ApplicationFormValue,
+} from './features/applications/application-form/application-form';
 
 @Component({
   imports: [ApplicationForm],
@@ -19,21 +21,14 @@ export class App implements OnInit {
     await this.load();
   }
 
-  async onSaved(value: { company: string; role: string; status: Status }) {
-    const applicationAdded: Application = {
+  async onSaved(value: ApplicationFormValue) {
+    const now = new Date().toISOString();
+    await this.applications.add({
       id: crypto.randomUUID(),
-      company: value.company,
-      role: value.role,
-      techStack: ['angular', 'node'],
-      seniority: 'senior',
-      workType: 'remote',
-      source: 'linkedin',
-      status: value.status,
-      priority: 'A',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-    await this.applications.add(applicationAdded);
+      ...value,
+      createdAt: now,
+      updatedAt: now,
+    });
     await this.load();
   }
 

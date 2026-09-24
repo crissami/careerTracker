@@ -1,19 +1,113 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <label>Company: </label>
-  <input formControlName="company" />
-  @if (form.controls.company.touched && form.controls.company.invalid) {
-    <p>Company is required</p>
-  }
-  <label>Role</label>
-  <input formControlName="role" />
-  @if (form.controls.role.touched && form.controls.role.invalid) {
-    <p>Role is required</p>
-  }
-  <label>Status</label>
-  <select formControlName="status">
-    @for (status of statuses; track status) {
-      <option [value]="status">{{ status }}</option>
+<form [formGroup]="form" (ngSubmit)="submit()" class="grid max-w-xl gap-3 p-8">
+  <label class="grid gap-1">
+    <span>Company</span>
+    <input formControlName="company" />
+    @if (form.controls.company.touched && form.controls.company.invalid) {
+      <p>Company is required</p>
     }
-  </select>
+  </label>
+
+  <label class="grid gap-1">
+    <span>Role</span>
+    <input formControlName="role" />
+    @if (form.controls.role.touched && form.controls.role.invalid) {
+      <p>Role is required</p>
+    }
+  </label>
+
+  <label class="grid gap-1">
+    <span>Tech stack</span>
+    <select formControlName="techStack" multiple>
+      @for (tech of techStacks; track tech) {
+        <option [value]="tech">{{ tech }}</option>
+      }
+    </select>
+  </label>
+
+  <label class="grid gap-1">
+    <span>Seniority</span>
+    <select formControlName="seniority">
+      @for (seniority of seniorities; track seniority) {
+        <option [value]="seniority">{{ seniority }}</option>
+      }
+    </select>
+  </label>
+
+  <label class="grid gap-1">
+    <span>Work type</span>
+    <select formControlName="workType">
+      @for (workType of workTypes; track workType) {
+        <option [value]="workType">{{ workType }}</option>
+      }
+    </select>
+  </label>
+
+  <label class="grid gap-1">
+    <span>Location</span>
+    <input formControlName="location" />
+  </label>
+
+  <label class="grid gap-1">
+    <span>Salary min</span>
+    <input type="number" formControlName="salaryMin" />
+  </label>
+
+  <label class="grid gap-1">
+    <span>Salary max</span>
+    <input type="number" formControlName="salaryMax" />
+  </label>
+
+  <label class="grid gap-1">
+    <span>Job URL</span>
+    <input type="url" formControlName="jobUrl" />
+  </label>
+
+  <label class="grid gap-1">
+    <span>Source</span>
+    <select formControlName="source">
+      @for (source of sources; track source) {
+        <option [value]="source">{{ source }}</option>
+      }
+    </select>
+  </label>
+
+  <label class="grid gap-1">
+    <span>Date applied</span>
+    <input type="date" formControlName="dateApplied" />
+  </label>
+
+  <label class="grid gap-1">
+    <span>Status</span>
+    <select formControlName="status">
+      @for (status of statuses; track status) {
+        <option [value]="status">{{ status }}</option>
+      }
+    </select>
+  </label>
+
+  <label class="grid gap-1">
+    <span>Priority</span>
+    <select formControlName="priority">
+      @for (priority of priorities; track priority) {
+        <option [value]="priority">{{ priority }}</option>
+      }
+    </select>
+  </label>
+
+  <label class="grid gap-1">
+    <span>Notes</span>
+    <textarea formControlName="notes" rows="3"></textarea>
+  </label>
+
+  <label class="grid gap-1">
+    <span>Next action</span>
+    <input formControlName="nextAction" />
+  </label>
+
+  <label class="grid gap-1">
+    <span>Next action date</span>
+    <input type="date" formControlName="nextActionDate" />
+  </label>
+
   <button type="submit">Add</button>
 </form>
