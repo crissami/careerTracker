@@ -1,11 +1,11 @@
-import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Applications } from './core/storage/applications';
 import { Application } from './core/models/application';
 import { ApplicationForm } from './features/applications/application-form/application-form';
 
 @Component({
-  imports: [RouterOutlet, ApplicationForm],
+  imports: [ApplicationForm],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',
