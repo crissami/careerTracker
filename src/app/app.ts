@@ -2,9 +2,10 @@ import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core
 import { RouterOutlet } from '@angular/router';
 import { Applications } from './core/storage/applications';
 import { Application } from './core/models/application';
+import { ApplicationForm } from './features/applications/application-form/application-form';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ApplicationForm],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',
@@ -18,11 +19,11 @@ export class App implements OnInit {
     await this.load();
   }
 
-  async seed() {
+  async onSaved(value: { company: string; role: string }) {
     const applicationAdded: Application = {
       id: crypto.randomUUID(),
-      company: 'Caseware',
-      role: 'Frontend Dev',
+      company: value.company,
+      role: value.role,
       techStack: ['angular', 'node'],
       seniority: 'senior',
       workType: 'remote',
@@ -39,6 +40,5 @@ export class App implements OnInit {
   private async load() {
     const applications = await this.applications.getAll();
     this.listApplications.set(applications);
-    this.applications.getAll();
   }
 }

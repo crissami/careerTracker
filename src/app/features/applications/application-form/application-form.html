@@ -1,0 +1,9 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label>Company: </label>
+  <input formControlName="company" />
+  <label>Role</label>
+  <input formControlName="role" />
+  <button type="submit">Add</button>
+</form>
+
+{{ form.value | json }}
