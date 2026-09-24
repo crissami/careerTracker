@@ -9,5 +9,11 @@
   @if (form.controls.role.touched && form.controls.role.invalid) {
     <p>Role is required</p>
   }
+  <label>Status</label>
+  <select formControlName="status">
+    @for (status of statuses; track status) {
+      <option [value]="status">{{ status }}</option>
+    }
+  </select>
   <button type="submit">Add</button>
 </form>
