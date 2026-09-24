@@ -32,6 +32,15 @@ export class App implements OnInit {
     await this.load();
   }
 
+  async onDelete(application: Application) {
+    const confirmed = confirm(`Delete ${application.company} — ${application.role}?`);
+    if (!confirmed) {
+      return;
+    }
+    await this.applications.remove(application.id);
+    await this.load();
+  }
+
   private async load() {
     const applications = await this.applications.getAll();
     this.listApplications.set(applications);

@@ -3,6 +3,7 @@
 @for (app of listApplications(); track app.id) {
   <p>{{ app.company }}</p>
   <p>{{ app.role }}</p>
+  <button type="button" (click)="onDelete(app)">Delete</button>
 } @empty {
   <p>You do not have any application yet!</p>
 }

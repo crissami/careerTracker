@@ -13,4 +13,9 @@ export class Applications {
     const db = await openDb();
     await db.put('applications', application);
   }
+
+  async remove(id: string): Promise<void> {
+    const db = await openDb();
+    await db.delete('applications', id);
+  }
 }
