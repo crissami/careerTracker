@@ -1,9 +1,7 @@
 <app-application-list
   [applications]="listApplications()"
-  (edit)="selected.set($event)"
+  (edit)="onEdit($event)"
   (delete)="onDelete($event)"
 />
-
-<button type="button" (click)="selected.set(null)">Back</button>
 
 <a routerLink="/new">New application</a>

@@ -30,14 +30,18 @@ export class Applications {
       updatedAt: now,
     });
   }
+  async remove(id: string): Promise<void> {
+    const db = await openDb();
+    await db.delete('applications', id);
+  }
+
+  async getById(id: string): Promise<Application | undefined> {
+    const db = await openDb();
+    return db.get('applications', id);
+  }
 
   private async save(application: Application): Promise<void> {
     const db = await openDb();
     await db.put('applications', application);
-  }
-
-  async remove(id: string): Promise<void> {
-    const db = await openDb();
-    await db.delete('applications', id);
   }
 }

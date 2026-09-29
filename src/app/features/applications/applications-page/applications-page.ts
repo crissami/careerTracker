@@ -1,8 +1,8 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Application, ApplicationFormValue } from '../../../core/models/application';
+import { Application } from '../../../core/models/application';
 import { Applications } from '../../../core/storage/applications';
 import { ApplicationList } from '../application-list/application-list';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   imports: [ApplicationList, RouterLink],
@@ -12,20 +12,11 @@ import { RouterLink } from '@angular/router';
 })
 export class ApplicationsPage implements OnInit {
   protected readonly listApplications = signal<Application[]>([]);
-  protected readonly selected = signal<Application | null>(null);
   private applications = inject(Applications);
+  private router = inject(Router);
 
   async ngOnInit() {
     await this.load();
-  }
-
-  async onSaved(value: ApplicationFormValue) {
-    const existing = this.selected();
-    const now = new Date().toISOString();
-
-    if (existing) await this.applications.edit(existing, value);
-    await this.load();
-    this.selected.set(null);
   }
 
   async onDelete(application: Application) {
@@ -35,7 +26,10 @@ export class ApplicationsPage implements OnInit {
     }
     await this.applications.remove(application.id);
     await this.load();
-    this.selected.set(null);
+  }
+
+  onEdit(value: Application) {
+    this.router.navigate(['/', value.id, 'edit']);
   }
 
   private async load() {
