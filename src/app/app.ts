@@ -26,7 +26,7 @@ export class App implements OnInit {
     const existing = this.selected();
     const now = new Date().toISOString();
 
-    await this.applications.add({
+    await this.applications.save({
       ...value,
       id: existing?.id ?? crypto.randomUUID(),
       createdAt: existing?.createdAt ?? now,

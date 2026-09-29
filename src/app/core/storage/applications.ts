@@ -9,7 +9,7 @@ export class Applications {
     return db.getAll('applications');
   }
 
-  async add(application: Application): Promise<void> {
+  async save(application: Application): Promise<void> {
     const db = await openDb();
     await db.put('applications', application);
   }
