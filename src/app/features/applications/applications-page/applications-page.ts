@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Application } from '../../../core/models/application';
 import { Applications } from '../../../core/storage/applications';
 import { ApplicationForm, ApplicationFormValue } from '../application-form/application-form';
@@ -10,7 +10,7 @@ import { ApplicationList } from '../application-list/application-list';
   styleUrl: './applications-page.scss',
   templateUrl: './applications-page.html',
 })
-export class ApplicationsPage {
+export class ApplicationsPage implements OnInit {
   protected readonly listApplications = signal<Application[]>([]);
   protected readonly selected = signal<Application | null>(null);
   private applications = inject(Applications);
