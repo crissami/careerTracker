@@ -5,9 +5,10 @@ import {
   ApplicationForm,
   ApplicationFormValue,
 } from './features/applications/application-form/application-form';
+import { ApplicationList } from './features/applications/application-list/application-list';
 
 @Component({
-  imports: [ApplicationForm],
+  imports: [ApplicationForm, ApplicationList],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',
@@ -43,6 +44,7 @@ export class App implements OnInit {
     }
     await this.applications.remove(application.id);
     await this.load();
+    this.selected.set(null);
   }
 
   private async load() {

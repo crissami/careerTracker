@@ -1,13 +1,10 @@
 <h1 class="text-3xl font-bold text-blue-600 p-8">careerTracker</h1>
 
-@for (app of listApplications(); track app.id) {
-  <p>{{ app.company }}</p>
-  <p>{{ app.role }}</p>
-  <button type="button" (click)="onDelete(app)">Delete</button>
-  <button type="button" (click)="selected.set(app)">Edit</button>
-} @empty {
-  <p>You do not have any application yet!</p>
-}
+<app-application-list
+  [applications]="listApplications()"
+  (edit)="selected.set($event)"
+  (delete)="onDelete($event)"
+/>
 
 <button type="button" (click)="selected.set(null)">Back</button>
 <app-application-form [application]="selected()" (saved)="onSaved($event)" />
