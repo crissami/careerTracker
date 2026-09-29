@@ -9,4 +9,5 @@
   <p>You do not have any application yet!</p>
 }
 
+<button type="button" (click)="selected.set(null)">Back</button>
 <app-application-form [application]="selected()" (saved)="onSaved($event)" />

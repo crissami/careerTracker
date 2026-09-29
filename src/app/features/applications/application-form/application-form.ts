@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, effect, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   Application,
@@ -53,6 +53,25 @@ export class ApplicationForm {
     nextAction: new FormControl('', { nonNullable: true }),
     nextActionDate: new FormControl('', { nonNullable: true }),
   });
+
+  constructor() {
+    effect(() => {
+      const app = this.application();
+      if (app) {
+        this.form.patchValue({
+          ...app,
+          location: app.location ?? '',
+          salaryMin: app.salaryMin ?? null,
+          salaryMax: app.salaryMax ?? null,
+          jobUrl: app.jobUrl ?? '',
+          dateApplied: app.dateApplied ?? '',
+          notes: app.notes ?? '',
+          nextAction: app.nextAction ?? '',
+          nextActionDate: app.nextActionDate ?? '',
+        });
+      } else this.form.reset();
+    });
+  }
 
   submit() {
     if (this.form.invalid) {

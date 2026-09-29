@@ -23,14 +23,17 @@ export class App implements OnInit {
   }
 
   async onSaved(value: ApplicationFormValue) {
+    const existing = this.selected();
     const now = new Date().toISOString();
+
     await this.applications.add({
-      id: crypto.randomUUID(),
       ...value,
-      createdAt: now,
+      id: existing?.id ?? crypto.randomUUID(),
+      createdAt: existing?.createdAt ?? now,
       updatedAt: now,
     });
     await this.load();
+    this.selected.set(null);
   }
 
   async onDelete(application: Application) {
