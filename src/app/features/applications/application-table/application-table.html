@@ -1,0 +1,33 @@
+<table class="w-full border-collapse text-sm">
+  <thead>
+    <tr class="border-b text-left">
+      <th class="p-2">Company</th>
+      <th class="p-2">Role</th>
+      <th class="p-2">Status</th>
+      <th class="p-2">Priority</th>
+      <th class="p-2">Date applied</th>
+      <th class="p-2">Next action</th>
+      <th class="p-2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (app of applications(); track app.id) {
+      <tr class="border-b">
+        <td class="p-2">{{ app.company }}</td>
+        <td class="p-2">{{ app.role }}</td>
+        <td class="p-2">{{ app.status }}</td>
+        <td class="p-2">{{ app.priority }}</td>
+        <td class="p-2">{{ app.dateApplied }}</td>
+        <td class="p-2">{{ app.nextAction }}</td>
+        <td class="p-2 flex gap-2">
+          <button type="button" (click)="edit.emit(app)">Edit</button>
+          <button type="button" (click)="delete.emit(app)">Delete</button>
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td class="p-2" colspan="7">You do not have any application yet!</td>
+      </tr>
+    }
+  </tbody>
+</table>

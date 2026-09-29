@@ -1,11 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Application } from '../../../core/models/application';
 import { Applications } from '../../../core/storage/applications';
-import { ApplicationList } from '../application-list/application-list';
 import { Router, RouterLink } from '@angular/router';
+import { ApplicationTable } from '../application-table/application-table';
 
 @Component({
-  imports: [ApplicationList, RouterLink],
+  imports: [ApplicationTable, RouterLink],
   selector: 'app-applications-page',
   styleUrl: './applications-page.scss',
   templateUrl: './applications-page.html',

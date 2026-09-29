@@ -1,8 +1,0 @@
-@for (app of applications(); track app.id) {
-  <p>{{ app.company }}</p>
-  <p>{{ app.role }}</p>
-  <button type="button" (click)="delete.emit(app)">Delete</button>
-  <button type="button" (click)="edit.emit(app)">Edit</button>
-} @empty {
-  <p>You do not have any application yet!</p>
-}

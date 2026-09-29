@@ -3,11 +3,11 @@ import { Application } from '../../../core/models/application';
 
 @Component({
   imports: [],
-  selector: 'app-application-list',
-  styleUrl: './application-list.scss',
-  templateUrl: './application-list.html',
+  selector: 'app-application-table',
+  styleUrl: './application-table.scss',
+  templateUrl: './application-table.html',
 })
-export class ApplicationList {
+export class ApplicationTable {
   readonly applications = input.required<Application[]>();
   protected readonly edit = output<Application>();
   protected readonly delete = output<Application>();
