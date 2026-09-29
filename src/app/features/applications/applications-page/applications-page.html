@@ -1,0 +1,8 @@
+<app-application-list
+  [applications]="listApplications()"
+  (edit)="selected.set($event)"
+  (delete)="onDelete($event)"
+/>
+
+<button type="button" (click)="selected.set(null)">Back</button>
+<app-application-form [application]="selected()" (saved)="onSaved($event)" />

@@ -1,10 +1,3 @@
 <h1 class="text-3xl font-bold text-blue-600 p-8">careerTracker</h1>
 
-<app-application-list
-  [applications]="listApplications()"
-  (edit)="selected.set($event)"
-  (delete)="onDelete($event)"
-/>
-
-<button type="button" (click)="selected.set(null)">Back</button>
-<app-application-form [application]="selected()" (saved)="onSaved($event)" />
+<router-outlet />
