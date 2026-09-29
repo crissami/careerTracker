@@ -14,9 +14,8 @@ import {
   TECH_STACKS,
   WorkType,
   WORK_TYPES,
+  ApplicationFormValue,
 } from '../../../core/models/application';
-
-export type ApplicationFormValue = Omit<Application, 'id' | 'createdAt' | 'updatedAt'>;
 
 @Component({
   imports: [ReactiveFormsModule],

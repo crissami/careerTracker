@@ -1,11 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Application } from '../../../core/models/application';
+import { Application, ApplicationFormValue } from '../../../core/models/application';
 import { Applications } from '../../../core/storage/applications';
-import { ApplicationForm, ApplicationFormValue } from '../application-form/application-form';
 import { ApplicationList } from '../application-list/application-list';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [ApplicationForm, ApplicationList],
+  imports: [ApplicationList, RouterLink],
   selector: 'app-applications-page',
   styleUrl: './applications-page.scss',
   templateUrl: './applications-page.html',
@@ -23,12 +23,7 @@ export class ApplicationsPage implements OnInit {
     const existing = this.selected();
     const now = new Date().toISOString();
 
-    await this.applications.save({
-      ...value,
-      id: existing?.id ?? crypto.randomUUID(),
-      createdAt: existing?.createdAt ?? now,
-      updatedAt: now,
-    });
+    if (existing) await this.applications.edit(existing, value);
     await this.load();
     this.selected.set(null);
   }

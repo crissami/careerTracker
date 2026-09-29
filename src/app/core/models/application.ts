@@ -58,3 +58,5 @@ export interface Application {
   createdAt: string;
   updatedAt: string;
 }
+
+export type ApplicationFormValue = Omit<Application, 'id' | 'createdAt' | 'updatedAt'>;
