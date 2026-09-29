@@ -1,4 +1,4 @@
-import { Component, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   Application,
@@ -25,6 +25,7 @@ export type ApplicationFormValue = Omit<Application, 'id' | 'createdAt' | 'updat
   templateUrl: './application-form.html',
 })
 export class ApplicationForm {
+  readonly application = input<Application | null>(null);
   readonly saved = output<ApplicationFormValue>();
 
   protected readonly statuses = STATUSES;

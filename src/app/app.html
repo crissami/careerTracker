@@ -4,8 +4,9 @@
   <p>{{ app.company }}</p>
   <p>{{ app.role }}</p>
   <button type="button" (click)="onDelete(app)">Delete</button>
+  <button type="button" (click)="selected.set(app)">Edit</button>
 } @empty {
   <p>You do not have any application yet!</p>
 }
 
-<app-application-form (saved)="onSaved($event)" />
+<app-application-form [application]="selected()" (saved)="onSaved($event)" />

@@ -15,6 +15,7 @@ import {
 export class App implements OnInit {
   protected readonly title = signal('careerTracker');
   protected readonly listApplications = signal<Application[]>([]);
+  protected readonly selected = signal<Application | null>(null);
   private applications = inject(Applications);
 
   async ngOnInit() {
