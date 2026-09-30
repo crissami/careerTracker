@@ -1,17 +1,33 @@
 <table class="w-full border-collapse text-sm">
   <thead>
     <tr class="border-b text-left">
-      <th class="p-2">Company</th>
-      <th class="p-2">Role</th>
-      <th class="p-2">Status</th>
-      <th class="p-2">Priority</th>
-      <th class="p-2">Date applied</th>
-      <th class="p-2">Next action</th>
+      <th class="p-2">
+        <button type="button" (click)="sortBy('company')">Company {{ arrow('company') }}</button>
+      </th>
+      <th class="p-2">
+        <button type="button" (click)="sortBy('role')">Role {{ arrow('role') }}</button>
+      </th>
+      <th class="p-2">
+        <button type="button" (click)="sortBy('status')">Status {{ arrow('status') }}</button>
+      </th>
+      <th class="p-2">
+        <button type="button" (click)="sortBy('priority')">Priority {{ arrow('priority') }}</button>
+      </th>
+      <th class="p-2">
+        <button type="button" (click)="sortBy('dateApplied')">
+          Date applied {{ arrow('dateApplied') }}
+        </button>
+      </th>
+      <th class="p-2">
+        <button type="button" (click)="sortBy('nextAction')">
+          Next action {{ arrow('nextAction') }}
+        </button>
+      </th>
       <th class="p-2"></th>
     </tr>
   </thead>
   <tbody>
-    @for (app of applications(); track app.id) {
+    @for (app of sorted(); track app.id) {
       <tr class="border-b">
         <td class="p-2">{{ app.company }}</td>
         <td class="p-2">{{ app.role }}</td>
