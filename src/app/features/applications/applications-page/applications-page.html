@@ -17,7 +17,7 @@
     (delete)="onDelete($event)"
   />
 } @else {
-  <p>Kanban coming soon</p>
+  <app-application-kanban [applications]="listApplications()" (edit)="onEdit($event)" />
 }
 
 <a routerLink="/new">New application</a>

@@ -1,22 +1,29 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { Application } from '../../../core/models/application';
 import { Applications } from '../../../core/storage/applications';
 import { Router, RouterLink } from '@angular/router';
 import { ApplicationTable } from '../application-table/application-table';
+import { ApplicationKanban } from '../application-kanban/application-kanban';
 
 type View = 'kanban' | 'table';
 
 @Component({
-  imports: [ApplicationTable, RouterLink],
+  imports: [ApplicationTable, ApplicationKanban, RouterLink],
   selector: 'app-applications-page',
   styleUrl: './applications-page.scss',
   templateUrl: './applications-page.html',
 })
 export class ApplicationsPage implements OnInit {
   protected readonly listApplications = signal<Application[]>([]);
-  protected view = signal<View>('table');
+  protected readonly view = signal<View>(
+    localStorage.getItem('view') === 'kanban' ? 'kanban' : 'table',
+  );
   private applications = inject(Applications);
   private router = inject(Router);
+
+  constructor() {
+    effect(() => localStorage.setItem('view', this.view()));
+  }
 
   async ngOnInit() {
     await this.load();
