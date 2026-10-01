@@ -1,5 +1,5 @@
 import { Component, effect, inject, OnInit, signal } from '@angular/core';
-import { Application } from '../../../core/models/application';
+import { Application, Status } from '../../../core/models/application';
 import { Applications } from '../../../core/storage/applications';
 import { Router, RouterLink } from '@angular/router';
 import { ApplicationTable } from '../application-table/application-table';
@@ -44,6 +44,11 @@ export class ApplicationsPage implements OnInit {
 
   protected changeView() {
     this.view.update((v) => (v === 'table' ? 'kanban' : 'table'));
+  }
+
+  protected async changeStatus(event: { application: Application; status: Status }) {
+    await this.applications.changeStatus(event.application, event.status);
+    await this.load();
   }
 
   private async load() {

@@ -1,5 +1,5 @@
 import { Service } from '@angular/core';
-import { Application, ApplicationFormValue } from '../models/application';
+import { Application, ApplicationFormValue, Status } from '../models/application';
 import { openDb } from './db';
 
 @Service()
@@ -30,9 +30,19 @@ export class Applications {
       updatedAt: now,
     });
   }
+
   async remove(id: string): Promise<void> {
     const db = await openDb();
     await db.delete('applications', id);
+  }
+
+  async changeStatus(existing: Application, status: Status) {
+    const now = new Date().toISOString();
+    await this.save({
+      ...existing,
+      status,
+      updatedAt: now,
+    });
   }
 
   async getById(id: string): Promise<Application | undefined> {
