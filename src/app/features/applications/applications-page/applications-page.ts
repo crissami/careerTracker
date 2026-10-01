@@ -4,6 +4,8 @@ import { Applications } from '../../../core/storage/applications';
 import { Router, RouterLink } from '@angular/router';
 import { ApplicationTable } from '../application-table/application-table';
 
+type View = 'kanban' | 'table';
+
 @Component({
   imports: [ApplicationTable, RouterLink],
   selector: 'app-applications-page',
@@ -12,6 +14,7 @@ import { ApplicationTable } from '../application-table/application-table';
 })
 export class ApplicationsPage implements OnInit {
   protected readonly listApplications = signal<Application[]>([]);
+  protected view = signal<View>('table');
   private applications = inject(Applications);
   private router = inject(Router);
 
@@ -28,8 +31,12 @@ export class ApplicationsPage implements OnInit {
     await this.load();
   }
 
-  onEdit(value: Application) {
+  protected onEdit(value: Application) {
     this.router.navigate(['/', value.id, 'edit']);
+  }
+
+  protected changeView() {
+    this.view.update((v) => (v === 'table' ? 'kanban' : 'table'));
   }
 
   private async load() {

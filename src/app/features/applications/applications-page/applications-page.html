@@ -1,7 +1,23 @@
-<app-application-table
-  [applications]="listApplications()"
-  (edit)="onEdit($event)"
-  (delete)="onDelete($event)"
-/>
+<button
+  (click)="changeView()"
+  type="button"
+  class="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-3 py-1.5 text-sm hover:bg-gray-100"
+>
+  @if (view() === 'table') {
+    <span aria-hidden="true">▦</span> Switch to Kanban
+  } @else {
+    <span aria-hidden="true">☰</span> Switch to Table
+  }
+</button>
+
+@if (view() === 'table') {
+  <app-application-table
+    [applications]="listApplications()"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+  />
+} @else {
+  <p>Kanban coming soon</p>
+}
 
 <a routerLink="/new">New application</a>
