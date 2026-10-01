@@ -1,113 +1,122 @@
-<form [formGroup]="form" (ngSubmit)="submit()" class="grid max-w-xl gap-3 p-8">
-  <label class="grid gap-1">
-    <span>Company</span>
-    <input formControlName="company" />
+<form [formGroup]="form" (ngSubmit)="submit()" class="card grid gap-5 p-6 sm:grid-cols-2">
+  <label class="field">
+    <span class="label">Company *</span>
+    <input class="input" formControlName="company" />
     @if (form.controls.company.touched && form.controls.company.invalid) {
-      <p>Company is required</p>
+      <p class="error">Company is required</p>
     }
   </label>
 
-  <label class="grid gap-1">
-    <span>Role</span>
-    <input formControlName="role" />
+  <label class="field">
+    <span class="label">Role *</span>
+    <input class="input" formControlName="role" />
     @if (form.controls.role.touched && form.controls.role.invalid) {
-      <p>Role is required</p>
+      <p class="error">Role is required</p>
     }
   </label>
 
-  <label class="grid gap-1">
-    <span>Tech stack</span>
-    <select formControlName="techStack" multiple>
-      @for (tech of techStacks; track tech) {
-        <option [value]="tech">{{ tech }}</option>
-      }
-    </select>
-  </label>
-
-  <label class="grid gap-1">
-    <span>Seniority</span>
-    <select formControlName="seniority">
-      @for (seniority of seniorities; track seniority) {
-        <option [value]="seniority">{{ seniority }}</option>
-      }
-    </select>
-  </label>
-
-  <label class="grid gap-1">
-    <span>Work type</span>
-    <select formControlName="workType">
-      @for (workType of workTypes; track workType) {
-        <option [value]="workType">{{ workType }}</option>
-      }
-    </select>
-  </label>
-
-  <label class="grid gap-1">
-    <span>Location</span>
-    <input formControlName="location" />
-  </label>
-
-  <label class="grid gap-1">
-    <span>Salary min</span>
-    <input type="number" formControlName="salaryMin" />
-  </label>
-
-  <label class="grid gap-1">
-    <span>Salary max</span>
-    <input type="number" formControlName="salaryMax" />
-  </label>
-
-  <label class="grid gap-1">
-    <span>Job URL</span>
-    <input type="url" formControlName="jobUrl" />
-  </label>
-
-  <label class="grid gap-1">
-    <span>Source</span>
-    <select formControlName="source">
-      @for (source of sources; track source) {
-        <option [value]="source">{{ source }}</option>
-      }
-    </select>
-  </label>
-
-  <label class="grid gap-1">
-    <span>Date applied</span>
-    <input type="date" formControlName="dateApplied" />
-  </label>
-
-  <label class="grid gap-1">
-    <span>Status</span>
-    <select formControlName="status">
+  <label class="field">
+    <span class="label">Status</span>
+    <select class="input capitalize" formControlName="status">
       @for (status of statuses; track status) {
         <option [value]="status">{{ status }}</option>
       }
     </select>
   </label>
 
-  <label class="grid gap-1">
-    <span>Priority</span>
-    <select formControlName="priority">
+  <label class="field">
+    <span class="label">Priority</span>
+    <select class="input" formControlName="priority">
       @for (priority of priorities; track priority) {
         <option [value]="priority">{{ priority }}</option>
       }
     </select>
   </label>
 
-  <label class="grid gap-1">
-    <span>Notes</span>
-    <textarea formControlName="notes" rows="3"></textarea>
+  <label class="field sm:col-span-2">
+    <span class="label">Tech stack</span>
+    <select class="input h-32" formControlName="techStack" multiple>
+      @for (tech of techStacks; track tech) {
+        <option [value]="tech">{{ tech }}</option>
+      }
+    </select>
+    <span class="text-xs text-gray-500">Hold Cmd to select more than one</span>
   </label>
 
-  <label class="grid gap-1">
-    <span>Next action</span>
-    <input formControlName="nextAction" />
+  <label class="field">
+    <span class="label">Seniority</span>
+    <select class="input capitalize" formControlName="seniority">
+      @for (seniority of seniorities; track seniority) {
+        <option [value]="seniority">{{ seniority }}</option>
+      }
+    </select>
   </label>
 
-  <label class="grid gap-1">
-    <span>Next action date</span>
-    <input type="date" formControlName="nextActionDate" />
+  <label class="field">
+    <span class="label">Work type</span>
+    <select class="input capitalize" formControlName="workType">
+      @for (workType of workTypes; track workType) {
+        <option [value]="workType">{{ workType }}</option>
+      }
+    </select>
   </label>
 
-  <button type="submit">Add</button>
+  <label class="field">
+    <span class="label">Location</span>
+    <input class="input" formControlName="location" />
+  </label>
+
+  <label class="field">
+    <span class="label">Source</span>
+    <select class="input capitalize" formControlName="source">
+      @for (source of sources; track source) {
+        <option [value]="source">{{ source }}</option>
+      }
+    </select>
+  </label>
+
+  <label class="field">
+    <span class="label">Salary min</span>
+    <input class="input" type="number" formControlName="salaryMin" />
+  </label>
+
+  <label class="field">
+    <span class="label">Salary max</span>
+    <input class="input" type="number" formControlName="salaryMax" />
+  </label>
+
+  <label class="field sm:col-span-2">
+    <span class="label">Job URL</span>
+    <input class="input" type="url" formControlName="jobUrl" placeholder="https://" />
+  </label>
+
+  <label class="field">
+    <span class="label">Date applied</span>
+    <input class="input" type="date" formControlName="dateApplied" />
+  </label>
+
+  <div class="hidden sm:block"></div>
+
+  <label class="field">
+    <span class="label">Next action</span>
+    <input
+      class="input"
+      formControlName="nextAction"
+      placeholder="e.g. Follow up with recruiter"
+    />
+  </label>
+
+  <label class="field">
+    <span class="label">Next action date</span>
+    <input class="input" type="date" formControlName="nextActionDate" />
+  </label>
+
+  <label class="field sm:col-span-2">
+    <span class="label">Notes</span>
+    <textarea class="input" formControlName="notes" rows="4"></textarea>
+  </label>
+
+  <div class="flex justify-end border-t border-gray-100 pt-5 sm:col-span-2">
+    <button type="submit" class="btn-primary">Save</button>
+  </div>
 </form>

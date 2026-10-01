@@ -1,49 +1,82 @@
-<table class="w-full border-collapse text-sm">
-  <thead>
-    <tr class="border-b text-left">
-      <th class="p-2">
-        <button type="button" (click)="sortBy('company')">Company {{ arrow('company') }}</button>
-      </th>
-      <th class="p-2">
-        <button type="button" (click)="sortBy('role')">Role {{ arrow('role') }}</button>
-      </th>
-      <th class="p-2">
-        <button type="button" (click)="sortBy('status')">Status {{ arrow('status') }}</button>
-      </th>
-      <th class="p-2">
-        <button type="button" (click)="sortBy('priority')">Priority {{ arrow('priority') }}</button>
-      </th>
-      <th class="p-2">
-        <button type="button" (click)="sortBy('dateApplied')">
-          Date applied {{ arrow('dateApplied') }}
-        </button>
-      </th>
-      <th class="p-2">
-        <button type="button" (click)="sortBy('nextAction')">
-          Next action {{ arrow('nextAction') }}
-        </button>
-      </th>
-      <th class="p-2"></th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (app of sorted(); track app.id) {
-      <tr class="border-b">
-        <td class="p-2">{{ app.company }}</td>
-        <td class="p-2">{{ app.role }}</td>
-        <td class="p-2">{{ app.status }}</td>
-        <td class="p-2">{{ app.priority }}</td>
-        <td class="p-2">{{ app.dateApplied }}</td>
-        <td class="p-2">{{ app.nextAction }}</td>
-        <td class="p-2 flex gap-2">
-          <button type="button" (click)="edit.emit(app)">Edit</button>
-          <button type="button" (click)="delete.emit(app)">Delete</button>
-        </td>
-      </tr>
-    } @empty {
+<div class="card overflow-x-auto">
+  <table class="w-full text-sm">
+    <thead
+      class="border-b border-gray-200 bg-gray-50 text-left text-xs tracking-wide text-gray-500 uppercase"
+    >
       <tr>
-        <td class="p-2" colspan="7">You do not have any application yet!</td>
+        <th class="px-4 py-3 font-medium">
+          <button type="button" class="hover:text-gray-900" (click)="sortBy('company')">
+            Company {{ arrow('company') }}
+          </button>
+        </th>
+        <th class="px-4 py-3 font-medium">
+          <button type="button" class="hover:text-gray-900" (click)="sortBy('role')">
+            Role {{ arrow('role') }}
+          </button>
+        </th>
+        <th class="px-4 py-3 font-medium">
+          <button type="button" class="hover:text-gray-900" (click)="sortBy('status')">
+            Status {{ arrow('status') }}
+          </button>
+        </th>
+        <th class="px-4 py-3 font-medium">
+          <button type="button" class="hover:text-gray-900" (click)="sortBy('priority')">
+            Priority {{ arrow('priority') }}
+          </button>
+        </th>
+        <th class="px-4 py-3 font-medium">
+          <button type="button" class="hover:text-gray-900" (click)="sortBy('dateApplied')">
+            Applied {{ arrow('dateApplied') }}
+          </button>
+        </th>
+        <th class="px-4 py-3 font-medium">
+          <button type="button" class="hover:text-gray-900" (click)="sortBy('nextAction')">
+            Next action {{ arrow('nextAction') }}
+          </button>
+        </th>
+        <th class="px-4 py-3"><span class="sr-only">Actions</span></th>
       </tr>
-    }
-  </tbody>
-</table>
+    </thead>
+
+    <tbody class="divide-y divide-gray-100">
+      @for (app of sorted(); track app.id) {
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-3 font-medium">{{ app.company }}</td>
+          <td class="px-4 py-3 text-gray-600">{{ app.role }}</td>
+          <td class="px-4 py-3">
+            <span class="badge" [attr.data-status]="app.status">{{ app.status }}</span>
+          </td>
+          <td class="px-4 py-3">
+            <span class="badge" [attr.data-priority]="app.priority">{{ app.priority }}</span>
+          </td>
+          <td class="px-4 py-3 whitespace-nowrap text-gray-600">{{ app.dateApplied ?? '—' }}</td>
+          <td class="px-4 py-3 text-gray-600">{{ app.nextAction ?? '—' }}</td>
+          <td class="px-4 py-3">
+            <div class="flex justify-end gap-3">
+              <button
+                type="button"
+                class="font-medium text-blue-600 hover:text-blue-800"
+                (click)="edit.emit(app)"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                class="font-medium text-red-600 hover:text-red-800"
+                (click)="delete.emit(app)"
+              >
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="7" class="px-4 py-12 text-center text-gray-500">
+            You do not have any application yet!
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

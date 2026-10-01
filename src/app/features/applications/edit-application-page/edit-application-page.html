@@ -1,2 +1,6 @@
-<a routerLink="/applications">Go Back</a>
-<app-application-form [application]="app()" (saved)="onSaved($event)" />
+<div class="mx-auto max-w-3xl">
+  <a routerLink="/applications" class="link-back">← Back to applications</a>
+  <h2 class="mt-2 mb-6 text-2xl font-semibold">Edit application</h2>
+
+  <app-application-form [application]="app()" (saved)="onSaved($event)" />
+</div>

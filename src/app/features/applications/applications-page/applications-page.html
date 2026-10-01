@@ -1,14 +1,20 @@
-<button
-  (click)="changeView()"
-  type="button"
-  class="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-3 py-1.5 text-sm hover:bg-gray-100"
->
-  @if (view() === 'table') {
-    <span aria-hidden="true">▦</span> Switch to Kanban
-  } @else {
-    <span aria-hidden="true">☰</span> Switch to Table
-  }
-</button>
+<div class="mb-6 flex flex-wrap items-center justify-between gap-4">
+  <div>
+    <h2 class="text-2xl font-semibold">Applications</h2>
+    <p class="text-sm text-gray-500">{{ listApplications().length }} in total</p>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <button type="button" class="btn-secondary" (click)="changeView()">
+      @if (view() === 'table') {
+        <span aria-hidden="true">▦</span> Kanban
+      } @else {
+        <span aria-hidden="true">☰</span> Table
+      }
+    </button>
+    <a routerLink="/new" class="btn-primary">+ New application</a>
+  </div>
+</div>
 
 @if (view() === 'table') {
   <app-application-table
@@ -23,5 +29,3 @@
     (statusChange)="changeStatus($event)"
   />
 }
-
-<a routerLink="/new">New application</a>
