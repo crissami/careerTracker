@@ -1,7 +1,8 @@
 # Ideas
 
-Parked ideas that are out of scope for the first release. The MVP is locked; this
-file is where new ideas go instead of into the code.
+Parked ideas that are outside the current phase of the roadmap in the README. New
+ideas go here instead of into the code. An idea moves into a phase only when it is
+decided, not when it is written down.
 
 ## Salary with currency and period
 
@@ -14,6 +15,9 @@ misread.
 Would need a currency field, a period field (`year` / `month`), and a decision
 about whether the list normalizes for sorting and comparison.
 
+Cheapest to decide when the PostgreSQL schema is designed in Phase 2. After that it
+needs a migration.
+
 Found while importing real applications on 2026-09-24.
 
 ## A richer source field
@@ -23,9 +27,22 @@ telling apart: applying on a company site, emailing a person directly, an intern
 referral, a recruiter reaching out first. Four buckets were not enough for a real
 set of sixteen applications.
 
+Same timing as the salary fields: decide it with the Phase 2 schema.
+
 ## Interview timeline
 
-The MVP shows interviews as a plain list under an application. A timeline view
+Phase 2 shows interviews as a plain list under an application. A timeline view
 would read better once there are several rounds per application.
 
-Parked on 2026-09-21, when the MVP was agreed.
+Parked on 2026-09-21.
+
+## Fill the form from a pasted job ad
+
+Paste the text of a job ad and the server extracts company, role, tech stack,
+seniority, work type, location and salary into the form, for review before saving.
+It would run on the server, so the API key never reaches the browser.
+
+Not decided. It changes the project's "no AI" scope, so it stays here until there
+is a decision.
+
+Parked on 2026-11-09.

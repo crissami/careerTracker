@@ -1,31 +1,47 @@
 # careerTracker
 
-A local-first job application tracker. Keep every application, interview and next
-step in one place, on your own machine. No account, no server, no data leaving the
-browser.
+A job application tracker I am building to get back into development after two
+years away. It started as a local-first Angular app and is growing into a
+full-stack one: Angular on the front, NestJS and PostgreSQL behind it.
 
 ## Why this exists
 
-I am coming back to frontend development after two years away, relearning Angular
-from the ground up, and I wanted the practice project to be something I would
-actually use every day rather than another todo list. I am job hunting right now,
-so the tracker and the person using it are the same person.
+I relearned Angular from the ground up on this project, and now I am using it to
+learn the backend side too. I wanted the practice project to be something I would
+actually use rather than another todo list. I am job hunting right now, so the
+person building the tracker and the person using it are the same.
 
-It is built in public, one small step at a time, and I write about the process as
-I go. https://theiterations.substack.com/
+It is built in public, one small step at a time. I write about the process at
+[Iterations](https://theiterations.substack.com/).
 
 ## Status
 
-Work in progress — week 1 of 6. Not usable yet.
+The frontend basics work locally. There are no tests and no backend yet; both are
+next on the roadmap below.
+
+## What works today
+
+- Create, edit and delete applications, with Reactive Forms and validation
+- A table view, sortable by column
+- A kanban board by status, with drag and drop between columns
+- A toggle between table and kanban, remembered between visits
+- All data stored in the browser's IndexedDB
 
 ## Stack
 
-- **Angular 22** — standalone components, signals, zoneless, new control flow
-- **Tailwind CSS v4** — styling
-- **Angular CDK** — drag and drop for the kanban board
-- **IndexedDB** via [`idb`](https://github.com/jakearchibald/idb) — all data stays in the browser
-- **Vitest** — unit tests on the parts worth testing
-- No backend, no authentication, no AI
+Today:
+
+- **Angular 22**: standalone components, signals, zoneless, new control flow
+- **Tailwind CSS v4**: styling
+- **Angular CDK**: drag and drop for the kanban board
+- **IndexedDB** via [`idb`](https://github.com/jakearchibald/idb): storage in the browser
+
+Planned, not built yet:
+
+- **Vitest**: unit tests
+- **NestJS** and **PostgreSQL**, with Docker Compose for local development
+- Session-based authentication with an HttpOnly cookie and CSRF protection
+- GitHub Actions running the tests, then a deploy
 
 ## Running locally
 
@@ -36,40 +52,59 @@ npm start
 
 Then open `http://localhost:4200/`.
 
-Other commands:
-
 ```bash
 npm run build    # production build into dist/
-npm test         # unit tests
 ```
 
 ## Roadmap
 
-The scope below is locked for the first release. New ideas go to `IDEAS.md`.
+New ideas go to `IDEAS.md`, not into the current phase.
+
+### Done
 
 - [x] Project setup, Tailwind, data model
-- [x] IndexedDB storage service, first list
-- [ ] Create, edit and delete applications with Reactive Forms
-- [ ] Table view and kanban board with a toggle between them
-- [ ] Filtering by status, tech, seniority, work type and priority, plus sorting
-- [ ] Interviews attached to an application
-- [ ] Export and import the whole database as JSON
-- [ ] Responsive layout and dark mode
+- [x] IndexedDB storage service
+- [x] Create, edit and delete applications with Reactive Forms
+- [x] Table view with sorting, kanban board with drag and drop, toggle between them
+
+### Phase 1: foundation (current)
+
+- [ ] Unit tests with Vitest, starting with the storage service
+- [ ] Error handling in the storage layer, with one shared database connection
+- [ ] Load data with `resource()` instead of `ngOnInit`
+
+### Phase 2: backend
+
+- [ ] NestJS API for applications and interviews
+- [ ] Interviews attached to an application, in the UI
+- [ ] PostgreSQL, run locally with Docker Compose
+- [ ] Session authentication with an HttpOnly cookie and CSRF protection
+- [ ] Export and import as JSON, also used to move existing data to the server
+
+### Phase 3: ship
+
+- [ ] GitHub Actions running the tests on every push
 - [ ] Deploy
+
+### Later, not scheduled
+
+- Filtering by status, tech, seniority, work type and priority
+- Responsive layout and dark mode
 
 ### What an application holds
 
 Company, role, tech stack, seniority, work type, location, salary range, job URL,
 source, date applied, status, priority, notes, and the next action with its date.
 
-Status pipeline: saved → applied → screening → interview → offer → rejected →
-archived.
+Statuses: saved, applied, screening, interview, offer, rejected, archived.
 
 ## Data and privacy
 
-Everything lives in your browser's IndexedDB. Nothing is uploaded anywhere. That
-also means clearing your browser data deletes your applications, so export to JSON
-if you care about them.
+Today everything lives in your browser's IndexedDB and nothing is uploaded.
+Clearing your browser data deletes your applications, and there is no export yet.
+
+When the backend lands in Phase 2, data moves to a PostgreSQL database behind a
+login, and this section will be rewritten.
 
 ## License
 
