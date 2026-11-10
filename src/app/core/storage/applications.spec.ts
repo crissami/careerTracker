@@ -3,7 +3,7 @@ import { Applications } from './applications';
 import { ApplicationFormValue } from '../models/application';
 
 describe('Applications', () => {
-  const applications = new Applications();
+  let applications: Applications;
   const value: ApplicationFormValue = {
     company: 'Acme',
     role: 'Frontend Developer',
@@ -17,6 +17,7 @@ describe('Applications', () => {
 
   beforeEach(() => {
     globalThis.indexedDB = new IDBFactory();
+    applications = new Applications();
   });
   it('creates an application and returns it from getAll', async () => {
     await applications.create(value);
@@ -31,7 +32,7 @@ describe('Applications', () => {
     expect(appSaved.createdAt).toEqual(appSaved.updatedAt);
   });
 
-  it('getById returns the application with that idd', async () => {
+  it('getById returns the application with that id', async () => {
     await applications.create(value);
 
     const all = await applications.getAll();
