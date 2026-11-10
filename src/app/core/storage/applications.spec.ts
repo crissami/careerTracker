@@ -78,9 +78,32 @@ describe('Applications', () => {
     const allAfterEdit = await applications.getAll();
     expect(allAfterEdit.length).toBe(1);
     const appAfterEdit = allAfterEdit[0];
-    expect(appAfterEdit?.id).toBe(appSaved?.id);
-    expect(appAfterEdit?.role).toBe('Senior Frontend Developer');
-    expect(appAfterEdit?.createdAt).toBe('2026-01-01T10:00:00.000Z');
-    expect(appAfterEdit?.updatedAt).toBe('2026-01-01T11:00:00.000Z');
+    expect(appAfterEdit.id).toBe(appSaved?.id);
+    expect(appAfterEdit.role).toBe('Senior Frontend Developer');
+    expect(appAfterEdit.createdAt).toBe('2026-01-01T10:00:00.000Z');
+    expect(appAfterEdit.updatedAt).toBe('2026-01-01T11:00:00.000Z');
+  });
+
+  it('changeStatus updates the status of an application', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-01-01T10:00:00Z'));
+    await applications.create(value);
+
+    const all = await applications.getAll();
+    expect(all.length).toBe(1);
+    const appSaved = all[0];
+
+    vi.setSystemTime(new Date('2026-01-01T11:00:00Z'));
+
+    await applications.changeStatus(appSaved, 'interview');
+
+    const allAfterChangeStatus = await applications.getAll();
+    expect(allAfterChangeStatus.length).toBe(1);
+    const appAfterChangeStatus = allAfterChangeStatus[0];
+    expect(appAfterChangeStatus).toEqual({
+      ...appSaved,
+      status: 'interview',
+      updatedAt: '2026-01-01T11:00:00.000Z',
+    });
   });
 });
