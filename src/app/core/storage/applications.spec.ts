@@ -1,5 +1,5 @@
 import { IDBFactory } from 'fake-indexeddb';
-import { Applications } from '../storage/applications';
+import { Applications } from './applications';
 import { ApplicationFormValue } from '../models/application';
 
 describe('Applications', () => {
